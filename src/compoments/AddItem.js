@@ -9,6 +9,9 @@ class AddItem extends Component {
     }
     addItem=()=>{
         this.props.addToDoList(this.state.inputValue)
+        this.setState({
+            inputValue:""
+        })
     }
     changeInputValue=(e)=>{
         let inputValue = e.target.value;
@@ -21,7 +24,7 @@ class AddItem extends Component {
    
     return (
         <div>
-        <input className="input-text" type="text" onChange={(e)=>this.changeInputValue(e)} />
+        <input className="input-text" type="text" value={this.state.inputValue} onChange={(e)=>this.changeInputValue(e)} />
         <div className="button" onClick={()=>this.addItem()}>Add</div>
       </div>
     );
