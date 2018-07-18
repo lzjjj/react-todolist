@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
 import TodoList from "./compoments/TodoList"
+import AddItem from './compoments/AddItem';
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state={
+      todoList : []
+    }
+  }
+  addToDoList=(e)=>{
+    let todoList = this.state.todoList
+    todoList.push({isComplete:false,content:e})
+    this.setState({
+      todoList
+    })
+    console.log(todoList)
+  }
   render() {
+    
     return (
       <div className="container">
         <div>
@@ -13,11 +29,8 @@ class App extends Component {
           </p>
         </div>
         <div >
-          <div>
-            <input class="input-text" type="text" name="ListItem" />
-            <div className="button" onclick="addItem()">Add</div>
-          </div>
-          <TodoList />
+          <AddItem addToDoList={(e)=>this.addToDoList(e)}/>
+          <TodoList todoList={this.state.todoList}/>
 
         </div>
 
