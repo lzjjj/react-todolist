@@ -78,15 +78,15 @@ class App extends Component {
           <div>
             <ul className="filters">
               <li>
-                <a href="#" data-filter="all" className="selected"
+                <a href="#" data-filter="all" className={this.state.status==="all"? "selected" :""}
                   onClick={()=>this.changeStatus('all')}>ALL</a>
               </li>
               <li>
-                <a href="#" data-filter="active" className="selected"
+                <a href="#" data-filter="active" className={this.state.status==="active"? "selected" :""}
                   onClick={()=>this.changeStatus('active')}>Active</a>
               </li>
               <li>
-                <a href="#" data-filter="complete" className="selected"
+                <a href="#" data-filter="complete" className={this.state.status==="complete"? "selected" :""}
                   onClick={()=>this.changeStatus('complete')}>Complete</a>
               </li>
             </ul>
