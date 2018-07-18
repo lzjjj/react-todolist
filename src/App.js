@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import TodoList from "./compoments/TodoList"
 import AddItem from './compoments/AddItem';
+import FilterList from './compoments/FilterList';
 
 class App extends Component {
   constructor() {
@@ -36,7 +37,6 @@ class App extends Component {
     this.setState({
       todoList
     })
-    console.log(todoList)
   }
   checkItem = (e) => {
     this.setState({
@@ -75,22 +75,7 @@ class App extends Component {
         <div >
           <AddItem addToDoList={(e) => this.addToDoList(e)} />
           <TodoList todoList={this.showTodoList(this.state.status)} checkItem={(e) => this.checkItem(e)} />
-          <div>
-            <ul className="filters">
-              <li>
-                <a href="#" data-filter="all" className={this.state.status==="all"? "selected" :""}
-                  onClick={()=>this.changeStatus('all')}>ALL</a>
-              </li>
-              <li>
-                <a href="#" data-filter="active" className={this.state.status==="active"? "selected" :""}
-                  onClick={()=>this.changeStatus('active')}>Active</a>
-              </li>
-              <li>
-                <a href="#" data-filter="complete" className={this.state.status==="complete"? "selected" :""}
-                  onClick={()=>this.changeStatus('complete')}>Complete</a>
-              </li>
-            </ul>
-          </div >
+          <FilterList changeStatus = {(e)=>this.changeStatus(e)} status={this.state.status}/>
         </div >
 
       </div >
