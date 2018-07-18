@@ -7,7 +7,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      todoList: []
+      todoList: [],
+      status: "all"
     }
   }
   generateUUID = () => {
@@ -31,17 +32,35 @@ class App extends Component {
   }
   addToDoList = (e) => {
     let todoList = this.state.todoList
-    todoList.push({ isComplete: false, content: e, id:this.generateUUID()})
+    todoList.push({ isComplete: false, content: e, id: this.generateUUID() })
     this.setState({
       todoList
     })
     console.log(todoList)
   }
-  checkItem=(e)=>{
+  checkItem = (e) => {
     this.setState({
-      todoList:e
+      todoList: e
     })
-    
+
+  }
+  showTodoList = (statusType) => {
+    let list = this.state.todoList
+    let type = this.state.status
+    if (statusType) {
+      type = statusType
+    }
+    if (type === "complete") {
+      list = list.filter(i => i.isComplete == true)
+    } else if (type === "active") {
+      list = list.filter(i => i.isComplete == false)
+    }
+    return list
+  }
+  changeStatus = (type) => {
+    this.setState({
+      status: type
+    })
   }
   render() {
 
@@ -55,11 +74,26 @@ class App extends Component {
         </div>
         <div >
           <AddItem addToDoList={(e) => this.addToDoList(e)} />
-          <TodoList todoList={this.state.todoList} checkItem={(e)=>this.checkItem(e)}/>
+          <TodoList todoList={this.showTodoList(this.state.status)} checkItem={(e) => this.checkItem(e)} />
+          <div>
+            <ul className="filters">
+              <li>
+                <a href="#" data-filter="all" className="selected"
+                  onClick={()=>this.changeStatus('all')}>ALL</a>
+              </li>
+              <li>
+                <a href="#" data-filter="active" className="selected"
+                  onClick={()=>this.changeStatus('active')}>Active</a>
+              </li>
+              <li>
+                <a href="#" data-filter="complete" className="selected"
+                  onClick={()=>this.changeStatus('complete')}>Complete</a>
+              </li>
+            </ul>
+          </div >
+        </div >
 
-        </div>
-
-      </div>
+      </div >
     );
   }
 }
