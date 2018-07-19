@@ -8,10 +8,15 @@ class AddItem extends Component {
         }
     }
     addItem=()=>{
-        this.props.addToDoList(this.state.inputValue)
-        this.setState({
-            inputValue:""
-        })
+        if(this.state.inputValue){
+            this.props.addToDoList(this.state.inputValue)
+            this.setState({
+                inputValue:""
+            })
+        } else{
+            alert("添加todo不能为空")
+        }
+        
     }
     changeInputValue=(e)=>{
         let inputValue = e.target.value;

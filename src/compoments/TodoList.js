@@ -25,8 +25,12 @@ class TodoList extends Component {
         <ol>
           {
             this.props.todoList.map(i => {
-              return (<li className={i.isComplete ? "checked" : ""} key={i.id} onDoubleClick={(e) => this.editItem(e)} onKeyPress={(e, itemId) => this.handOnKeyPress(e, i.id)}>
-                <input name="done-todo" type="checkbox" className="done-todo" onChange={(event, id) => this.checkItem(event, i.id)} checked={i.isComplete?true:false}/>
+              return (<li className={i.isComplete ? "checked" : ""}
+                key={i.id} onDoubleClick={(e) => this.editItem(e)}
+                onKeyPress={(e, itemId) => this.handOnKeyPress(e, i.id)}>
+                <input name="done-todo" type="checkbox" className="done-todo"
+                  onChange={(event, id) => this.checkItem(event, i.id)}
+                  checked={i.isComplete ? true : false} />
                 {i.content}
               </li>)
             })
